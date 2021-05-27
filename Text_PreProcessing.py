@@ -57,6 +57,8 @@ def Clean_TextGender(x):
         res=''
     return res
 
+#---------------------- Use function below if the input comes from Dataframe ------------------------
+
 def Clean_FirstName(first_name_col, dfIn):  
     dfIn[first_name_col]=dfIn.apply(lambda x:Clean_Prefix(x[first_name_col]),axis=1)
     return dfIn
