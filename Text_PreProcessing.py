@@ -23,16 +23,8 @@ def Clean_Prefix(x):
         themessage=x
     return themessage
 
-def Clean_FirstName(first_name_col, dfIn):  
-    dfIn[first_name_col]=dfIn.apply(lambda x:Clean_Prefix(x[first_name_col]),axis=1)
-    return dfIn
-
 def RemoveWhiteSpace_ALL(x):
     return x.strip().replace(' ','')
-
-def Clean_IdCard(idcard_col, dfIn):
-    dfIn[idcard_col]=dfIn.apply(lambda x:RemoveWhiteSpace_ALL(x[idcard_col]),axis=1)
-    return dfIn
 
 def ModifyPhoneNumber(x):
     dummy=x.strip().replace(' ','')
@@ -45,10 +37,6 @@ def ModifyPhoneNumber(x):
             dummy='0'+dummy
         print(' result : ',dummy)
     return dummy
-
-def Clean_MobileNumber(mobile_col, dfIn):
-    dfIn[mobile_col]=dfIn.apply(lambda x:ModifyPhoneNumber(x[mobile_col]),axis=1)    
-    return dfIn
 
 def Clean_TextGender(x):
     try:
@@ -69,29 +57,38 @@ def Clean_TextGender(x):
         res=''
     return res
 
+def Clean_FirstName(first_name_col, dfIn):  
+    dfIn[first_name_col]=dfIn.apply(lambda x:Clean_Prefix(x[first_name_col]),axis=1)
+    return dfIn
+def Clean_IdCard(idcard_col, dfIn):
+    dfIn[idcard_col]=dfIn.apply(lambda x:RemoveWhiteSpace_ALL(x[idcard_col]),axis=1)
+    return dfIn
+def Clean_MobileNumber(mobile_col, dfIn):
+    dfIn[mobile_col]=dfIn.apply(lambda x:ModifyPhoneNumber(x[mobile_col]),axis=1)    
+    return dfIn
 def Clean_Gender(gender_col, dfIn):
     dfIn[gender_col]=dfIn.apply(lambda x:Clean_TextGender(x[gender_col]),axis=1)    
     return dfIn
 
 
-file_path='C:\\Users\\70018928\\Documents\\Project2021\\Ad-Hoc\\CleanText\\'
+# file_path='C:\\Users\\70018928\\Documents\\Project2021\\Ad-Hoc\\CleanText\\'
 
-file_name_1='DataVaccineSV_20210427_0830_.xlsx'
-file_name_2='DataVaccineSV_20210427_1500.xlsx'
-file_name_3='TemplateVaccineSV_20210426_1930.xlsx'
+# file_name_1='DataVaccineSV_20210427_0830_.xlsx'
+# file_name_2='DataVaccineSV_20210427_1500.xlsx'
+# file_name_3='TemplateVaccineSV_20210426_1930.xlsx'
 
-cvt={'contact_emdid':str, 'contact_mobile':str}
-dfIn=pd.read_excel(file_path+file_name_1,sheet_name='ข้อมูลพนักงาน', converters=cvt )
+# cvt={'contact_emdid':str, 'contact_mobile':str}
+# dfIn=pd.read_excel(file_path+file_name_1,sheet_name='ข้อมูลพนักงาน', converters=cvt )
 
-print(dfIn.head(10))
-dfDummy=dfIn.head(10).copy()
+# print(dfIn.head(10))
+# dfDummy=dfIn.head(10).copy()
 
-first_name_col='Gender'
-#dfDummy=Clean_FirstName(first_name_col,dfDummy)
-#dfDummy=Clean_IdCard(first_name_col,dfDummy)
-dfDummy=Clean_Gender(first_name_col,dfDummy)
-dfDummy.to_csv(file_path+'check_prefix.csv')
-print(' ===> ',dfDummy)
+# first_name_col='Gender'
+# #dfDummy=Clean_FirstName(first_name_col,dfDummy)
+# #dfDummy=Clean_IdCard(first_name_col,dfDummy)
+# dfDummy=Clean_Gender(first_name_col,dfDummy)
+# dfDummy.to_csv(file_path+'check_prefix.csv')
+# print(' ===> ',dfDummy)
 
 ###****************************************************************
 end_datetime = datetime.now()
