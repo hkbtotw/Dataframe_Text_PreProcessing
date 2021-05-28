@@ -22,10 +22,8 @@ def Clean_Prefix(x):
     except:
         themessage=x
     return themessage
-
 def RemoveWhiteSpace_ALL(x):
     return x.strip().replace(' ','')
-
 def ModifyPhoneNumber(x):
     dummy=x.strip().replace(' ','')
     dummy=dummy.replace('-','')
@@ -37,7 +35,6 @@ def ModifyPhoneNumber(x):
             dummy='0'+dummy
         print(' result : ',dummy)
     return dummy
-
 def Clean_TextGender(x):
     try:
         word_list = ['f.', 'f','หญิง','ญ.','ญ','female']  
@@ -56,8 +53,7 @@ def Clean_TextGender(x):
     except:
         res=''
     return res
-
-def Clean_TextProvince(x):    
+def Clean_TextProvince_Th(x):    
     try:
         words = [r'จังหวัด',r'จ.',r'จ ',r'เมือง']  
         themessage = str(x)    
@@ -66,8 +62,7 @@ def Clean_TextProvince(x):
     except:
         themessage=x
     return themessage
-
-def Clean_TextDistrict(x):    
+def Clean_TextDistrict_Th(x):    
     try:
         words = [r'อำเภอ',r'อ.',r'อ ',r'เมือง']  
         themessage = str(x)    
@@ -76,8 +71,7 @@ def Clean_TextDistrict(x):
     except:
         themessage=x
     return themessage
-
-def Clean_TextSubDistrict(x):    
+def Clean_TextSubDistrict_Th(x):    
     try:
         words = [r'ตำบล',r'ต.',r'ต ',r'เมือง']  
         themessage = str(x)    
@@ -86,10 +80,35 @@ def Clean_TextSubDistrict(x):
     except:
         themessage=x
     return themessage
+def Clean_TextProvince_En(x):    
+    try:
+        words = [r'จังหวัด',r'จ.',r'จ ',r'เมือง','Muang','Maung']  
+        themessage = str(x)    
+        for word in words:
+            themessage =  themessage.replace(word, "").strip()  
+    except:
+        themessage=x
+    return themessage
+def Clean_TextDistrict_En(x):    
+    try:
+        words = [r'อำเภอ',r'อ.',r'อ ',r'เมือง','Amphor', 'Amphur', 'A.','A ']  
+        themessage = str(x)    
+        for word in words:
+            themessage =  themessage.replace(word, "").strip()  
+    except:
+        themessage=x
+    return themessage
+def Clean_TextSubDistrict_En(x):    
+    try:
+        words = [r'ตำบล',r'ต.',r'ต ',r'เมือง','Tambon','T.','T ']  
+        themessage = str(x)    
+        for word in words:
+            themessage =  themessage.replace(word, "").strip()  
+    except:
+        themessage=x
+    return themessage
 
-
-#---------------------- Use function below if the input comes from Dataframe ------------------------
-
+#---------------------- Use function below if the input comes in Dataframe format  ------------------------
 def Clean_FirstName(first_name_col, dfIn):  
     dfIn[first_name_col]=dfIn.apply(lambda x:Clean_Prefix(x[first_name_col]),axis=1)
     return dfIn
@@ -103,16 +122,23 @@ def Clean_Gender(gender_col, dfIn):
     dfIn[gender_col]=dfIn.apply(lambda x:Clean_TextGender(x[gender_col]),axis=1)    
     return dfIn
 
-def Clean_Province(province_col,dfIn):
-    dfIn[province_col]=dfIn.apply(lambda x:Clean_TextProvince(x[province_col]),axis=1)    
+def Clean_Province_Th(province_col,dfIn):
+    dfIn[province_col]=dfIn.apply(lambda x:Clean_TextProvince_Th(x[province_col]),axis=1)    
     return dfIn
-
-def Clean_District(district_col,dfIn):
-    dfIn[district_col]=dfIn.apply(lambda x:Clean_TextDistrict(x[district_col]),axis=1)    
+def Clean_District_Th(district_col,dfIn):
+    dfIn[district_col]=dfIn.apply(lambda x:Clean_TextDistrict_Th(x[district_col]),axis=1)    
     return dfIn
-
-def Clean_SubDistrict(subdistrict_col,dfIn):
-    dfIn[subdistrict_col]=dfIn.apply(lambda x:Clean_TextSubDistrict(x[subdistrict_col]),axis=1)    
+def Clean_SubDistrict_Th(subdistrict_col,dfIn):
+    dfIn[subdistrict_col]=dfIn.apply(lambda x:Clean_TextSubDistrict_Th(x[subdistrict_col]),axis=1)    
+    return dfIn
+def Clean_Province_En(province_col,dfIn):
+    dfIn[province_col]=dfIn.apply(lambda x:Clean_TextProvince_En(x[province_col]),axis=1)    
+    return dfIn
+def Clean_District_En(district_col,dfIn):
+    dfIn[district_col]=dfIn.apply(lambda x:Clean_TextDistrict_En(x[district_col]),axis=1)    
+    return dfIn
+def Clean_SubDistrict_En(subdistrict_col,dfIn):
+    dfIn[subdistrict_col]=dfIn.apply(lambda x:Clean_TextSubDistrict_En(x[subdistrict_col]),axis=1)    
     return dfIn
 
 
