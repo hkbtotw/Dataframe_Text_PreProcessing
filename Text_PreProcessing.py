@@ -57,6 +57,37 @@ def Clean_TextGender(x):
         res=''
     return res
 
+def Clean_TextProvince(x):    
+    try:
+        words = [r'จังหวัด',r'จ.',r'จ ',r'เมือง']  
+        themessage = str(x)    
+        for word in words:
+            themessage =  themessage.replace(word, "").strip()  
+    except:
+        themessage=x
+    return themessage
+
+def Clean_TextDistrict(x):    
+    try:
+        words = [r'อำเภอ',r'อ.',r'อ ',r'เมือง']  
+        themessage = str(x)    
+        for word in words:
+            themessage =  themessage.replace(word, "").strip()  
+    except:
+        themessage=x
+    return themessage
+
+def Clean_TextSubDistrict(x):    
+    try:
+        words = [r'ตำบล',r'ต.',r'ต ',r'เมือง']  
+        themessage = str(x)    
+        for word in words:
+            themessage =  themessage.replace(word, "").strip()  
+    except:
+        themessage=x
+    return themessage
+
+
 #---------------------- Use function below if the input comes from Dataframe ------------------------
 
 def Clean_FirstName(first_name_col, dfIn):  
@@ -72,6 +103,18 @@ def Clean_Gender(gender_col, dfIn):
     dfIn[gender_col]=dfIn.apply(lambda x:Clean_TextGender(x[gender_col]),axis=1)    
     return dfIn
 
+def Clean_Province(province_col,dfIn):
+    dfIn[province_col]=dfIn.apply(lambda x:Clean_TextProvince(x[province_col]),axis=1)    
+    return dfIn
+
+def Clean_District(district_col,dfIn):
+    dfIn[district_col]=dfIn.apply(lambda x:Clean_TextDistrict(x[district_col]),axis=1)    
+    return dfIn
+
+def Clean_SubDistrict(subdistrict_col,dfIn):
+    dfIn[subdistrict_col]=dfIn.apply(lambda x:Clean_TextSubDistrict(x[subdistrict_col]),axis=1)    
+    return dfIn
+
 
 # file_path='C:\\Users\\70018928\\Documents\\Project2021\\Ad-Hoc\\CleanText\\'
 
@@ -79,16 +122,19 @@ def Clean_Gender(gender_col, dfIn):
 # file_name_2='DataVaccineSV_20210427_1500.xlsx'
 # file_name_3='TemplateVaccineSV_20210426_1930.xlsx'
 
-# cvt={'contact_emdid':str, 'contact_mobile':str}
-# dfIn=pd.read_excel(file_path+file_name_1,sheet_name='ข้อมูลพนักงาน', converters=cvt )
+# cvt={'ALL_EMPID':str,'contact_emdid':str, 'contact_mobile':str}
+# dfIn=pd.read_excel(file_path+file_name_1,sheet_name='MST_Employee', converters=cvt )
 
 # print(dfIn.head(10))
 # dfDummy=dfIn.head(10).copy()
 
-# first_name_col='Gender'
+# first_name_col='Province_1'
 # #dfDummy=Clean_FirstName(first_name_col,dfDummy)
 # #dfDummy=Clean_IdCard(first_name_col,dfDummy)
-# dfDummy=Clean_Gender(first_name_col,dfDummy)
+# #dfDummy=Clean_Gender(first_name_col,dfDummy)
+
+# dfDummy=Clean_Province(first_name_col,dfDummy)
+
 # dfDummy.to_csv(file_path+'check_prefix.csv')
 # print(' ===> ',dfDummy)
 
