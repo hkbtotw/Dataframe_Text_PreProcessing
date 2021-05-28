@@ -100,7 +100,7 @@ def Clean_TextDistrict_En(x):
     return themessage
 def Clean_TextSubDistrict_En(x):    
     try:
-        words = [r'ตำบล',r'ต.',r'ต ',r'เมือง','Tambon','T.','T ']  
+        words = [r'ตำบล',r'ต.',r'ต ',r'เมือง','Tambon','Tumbon','T.','T ']  
         themessage = str(x)    
         for word in words:
             themessage =  themessage.replace(word, "").strip()  
