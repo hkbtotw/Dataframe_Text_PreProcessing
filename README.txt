@@ -2,7 +2,7 @@
 
 Update:
 2021-05-27 : Created, tawan.t   : add personal information cleanup
-
+2021-05-28 : add province district subdistrict clean up
 
 HowTo:
 
