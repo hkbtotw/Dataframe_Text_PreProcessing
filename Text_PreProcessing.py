@@ -107,6 +107,17 @@ def Clean_TextSubDistrict_En(x):
     except:
         themessage=x
     return themessage
+def ModifyCustomerId(x):
+    dummy=str(x).strip().replace(' ','')
+    dummy=dummy.replace('-','')
+    #print(x, ' ---  ',dummy)
+    if(len(dummy)<=12):
+        sum=12-len(dummy)
+        #print(len(dummy),' : ',sum)
+        for n in range(sum):
+            dummy='0'+dummy
+        #print(' result : ',dummy)
+    return dummy
 
 #---------------------- Use function below if the input comes in Dataframe format  ------------------------
 def Clean_FirstName(first_name_col, dfIn):  
@@ -120,6 +131,9 @@ def Clean_MobileNumber(mobile_col, dfIn):
     return dfIn
 def Clean_Gender(gender_col, dfIn):
     dfIn[gender_col]=dfIn.apply(lambda x:Clean_TextGender(x[gender_col]),axis=1)    
+    return dfIn
+def Clean_CustomerId(mobile_col, dfIn):
+    dfIn[mobile_col]=dfIn.apply(lambda x:ModifyCustomerId(x[mobile_col]),axis=1)    
     return dfIn
 
 def Clean_Province_Th(province_col,dfIn):
